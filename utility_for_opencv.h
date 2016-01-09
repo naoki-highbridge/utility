@@ -1,4 +1,7 @@
-/** OpenCV関連のユーティリティ */
+/** 
+ * @file  utility_for_opencv.h
+ * @brief OpenCV関連のユーティリティ
+ */
 
 #ifndef UTILITY_FOR_OPENCV_H
 #define UTILITY_FOR_OPENCV_H

@@ -1,4 +1,7 @@
-/** Union Find Tree */
+/**
+ * @file unionfind.h
+ * @brief Union Find Treeの構造体。
+ */
 
 #ifndef UNIONFIND_H
 #define UNIONFIND_H
