@@ -1,6 +1,6 @@
 /**
  * @file unionfind.h
- * @brief Union Find Treeの構造体。
+ * @brief Structure of Union-Find Tree。
  */
 
 #ifndef UNIONFIND_H
@@ -8,9 +8,17 @@
 
 #include <vector>
 
+/**
+ * @brief Union-Find Tree.
+ */
 struct UnionFind {
 	std::vector<int> data;
+	/** @param size Number of data */
 	UnionFind(int size) : data(size, -1) { }
+	/**
+	 * @brief  Union data x and y.
+	 * @param  x,y Index of data which is united.
+	 */
 	bool unionSet(int x, int y) {
 		x = root(x); y = root(y);
 		if (x != y) {
@@ -19,6 +27,9 @@ struct UnionFind {
 		}
 		return x != y;
 	}
+	/**
+	 * @brief Wheather x and y have common root or not.
+	 */
 	bool findSet(int x, int y) {
 		return root(x) == root(y);
 	}

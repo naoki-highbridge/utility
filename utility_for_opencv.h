@@ -11,8 +11,11 @@
 /**
  * @brief   確実にゼロで初期化されたオブジェクトを返す。
  * @details TpはMatの要素の型になり得るもののみ。
- *          int   a = zero<int>();   // a = 0;
- *          Vec3f v = zero<Vec3f>(); // v = [0.f, 0.f, 0.f];
+ * @return  オブジェクト。
+ * @code
+ * int   a = zero<int>();   // a = 0;
+ * Vec3f v = zero<Vec3f>(); // v = [0.f, 0.f, 0.f];
+ * @endcode
  */
 template<typename Tp>
 Tp zero() {
@@ -44,9 +47,13 @@ void convertFrom32bitLab(const cv::Mat& lab_img, cv::Mat& bgr_img) {
 
 /**
  * @brief   cv::Vecや配列からcv::Scalarを作成。
- * @details make_scalar(Vec3f(1,2,3)); などとして使う。
  * @param   vec 添字で[0]~[n-1]までアクセスできるならOK。
  * @param   n   第一引数の要素の数。5以上を指定するとエラー。
+ * @return  Scalar(vec[0:n-1]).
+ * @code
+ * Vec3f  v(1,2,3);
+ * Scalar s = make_scalar(v);
+ * @endcode
  */
 template<typename Tp> cv::Scalar make_scalar(const Tp& vec, int n=3)
 {
@@ -57,9 +64,14 @@ template<typename Tp> cv::Scalar make_scalar(const Tp& vec, int n=3)
 
 /**
  * @brief	cv::Matの要素をハッシュ化し、ハッシュのインデックスに置き換える。
- * @details	R風に書くとこんな感じ：dst <- as.numeric(as.factor(src));
+ * @details	
+ * 入力配列の要素を連続した整数に置き換える。
+ * これは例えば3次元ベクトルを要素として持つ入力配列を1次元に変換する。
+ * 置き換えられる整数は、0から1づつ連続した値が用いられ、最大値は要素の種類数-1。
+ * R風に書くとこんな感じ：dst <- as.numeric(as.factor(src));
  * @param	src_img 入力配列。要素にat<Tp>でアクセスする。
  * @param	dst_img 出力配列。Mat(src_img.size(), CV_32SC1).
+ * @return  要素の種類数=dst_imgの最大値+1
  */
 template<typename Tp>
 int quantize(const cv::Mat& src_img, cv::Mat& dst_img){
